@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reciclamos Plástico, Transformamos Vidas</title>
+  <meta name="description" content="Proyecto inclusivo de reciclaje: macetas ecológicas con plantas, creadas con economía circular e inclusión laboral." />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#111a2e;
+      --soft:#16213d;
+      --text:#eaf0ff;
+      --muted:#b8c6ff;
+      --accent:#5cffb0;
+      --accent2:#ffb85c;
+      --danger:#ff5c7a;
+      --white:#ffffff;
+      --shadow: 0 18px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 10% 10%, rgba(92,255,176,.15), transparent 60%),
+                  radial-gradient(900px 700px at 90% 0%, rgba(255,184,92,.12), transparent 55%),
+                  radial-gradient(1200px 800px at 50% 90%, rgba(92,198,255,.08), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      line-height:1.5;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .container{ width: min(var(--max), 92vw); margin: 0 auto; }
+
+    /* Accesibilidad: foco visible */
+    :focus-visible{
+      outline: 3px solid var(--accent2);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    /* Header */
+    header{
+      position: sticky;
+      top:0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(11,18,32,.65);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+      gap: 16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing:.2px;
+      font-size: 16px;
+    }
+
+    .logo{
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(92,255,176,.9), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(255,184,92,.9), transparent 55%),
+        rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    }
+
+    nav ul{
+      display:flex;
+      list-style:none;
+      gap: 14px;
+      padding:0;
+      margin:0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a{
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    nav a:hover{
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+
+    .nav-cta{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease;
+      font-size: 14px;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(92,255,176,.95), rgba(92,255,176,.45));
+      border: 1px solid rgba(92,255,176,.55);
+      color: #052012;
+    }
+    .btn.secondary{
+      background: linear-gradient(135deg, rgba(255,184,92,.95), rgba(255,184,92,.45));
+      border: 1px solid rgba(255,184,92,.55);
+      color: #241404;
+    }
+
+    /* Hero */
+    .hero{
+      padding: 56px 0 28px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-card{
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius2);
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(92,255,176,.10);
+      border: 1px solid rgba(92,255,176,.20);
+      color: #b9ffe0;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    h1{
+      margin: 0 0 12px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.6px;
+    }
+
+    .lead{
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 60ch;
+      margin: 0 0 18px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .hero-side{
+      display:grid;
+      gap: 14px;
+    }
+
+    .mini{
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+    .mini h3{ margin: 0 0 6px; font-size: 16px; }
+    .mini p{ margin:0; color: var(--muted); font-size: 14px; }
+
+    /* Sections */
+    section{
+      padding: 28px 0;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .section-title h2{
+      margin:0;
+      font-size: 24px;
+      letter-spacing: -0.3px;
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted);
+      max-width: 60ch;
+      font-size: 14px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .grid-4{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .card{
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.22);
+    }
+
+    .tag{
+      display:inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .card h3{
+      margin: 6px 0 6px;
+      font-size: 16px;
+    }
+    .card p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Impact numbers */
+    .metric{
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .metric strong{
+      font-size: 28px;
+      letter-spacing: -0.6px;
+    }
+    .metric span{ color: var(--muted); font-weight: 600; }
+
+    /* Products */
+    .product{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      min-height: 170px;
+    }
+    .product .price{
+      margin-top: auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* Checklist */
+    .checklist{
+      display:grid;
+      gap: 8px;
+      margin:0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    /* CTA band */
+    .cta{
+      padding: 26px;
+      border-radius: var(--radius2);
+      background: linear-gradient(135deg, rgba(92,255,176,.14), rgba(255,184,92,.10));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .cta h3{
+      margin:0;
+      font-size: 18px;
+    }
+    .cta p{
+      margin: 4px 0 0;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    /* Form */
+    form{
+      display:grid;
+      gap: 12px;
+    }
+    label{
+      font-weight: 800;
+      font-size: 13px;
+      color: #dbe5ff;
+    }
+    input, select, textarea{
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-size: 14px;
+    }
+    textarea{ min-height: 120px; resize: vertical; }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Footer */
+    footer{
+      padding: 28px 0 40px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items:start;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-4{ grid-template-columns: 1fr 1fr; }
+      .footer-grid{ grid-template-columns: 1fr; }
+      .form-grid{ grid-template-columns: 1fr; }
+      nav ul{ display:none; }
+    }
+    @media (max-width: 520px){
+      .grid-4{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="container" href="#contenido" style="display:block; padding:10px 0; color:transparent;">
+    Saltar al contenido
+  </a>
+
+  <header>
+    <div class="container nav" aria-label="Barra de navegación principal">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-size:14px; color:var(--muted); font-weight:700;">Proyecto inclusivo</div>
+          <div style="font-size:15px;">Reciclamos Plástico</div>
+        </div>
+      </div>
+
+      <nav aria-label="Menú">
+        <ul>
+          <li><a href="#quehacemos">Qué hacemos</a></li>
+          <li><a href="#impacto">Impacto</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#inclusion">Inclusión</a></li>
+          <li><a href="#alianzas">Alianzas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="btn" href="#productos">🌱 Comprar</a>
+        <a class="btn primary" href="#alianzas">🤝 Ser aliado</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" class="container">
+    <!-- HERO -->
+    <section class="hero" aria-label="Sección principal">
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="kicker">♻️ Economía circular + ♿ Inclusión laboral</div>
+
+          <h1>Reciclamos plástico, transformamos vidas.</h1>
+
+          <p class="lead">
+            Convertimos residuos plásticos en <strong>macetas ecológicas</strong> con plantas listas para entregar,
+            integrando a <strong>personas con discapacidad</strong> en procesos accesibles, dignos y productivos.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn secondary" href="#productos">🌿 Ver productos</a>
+            <a class="btn primary" href="#contacto">📩 Cotizar / Contactar</a>
+            <a class="btn" href="#inclusion">♿ Conocer la inclusión</a>
+          </div>
+
+          <p style="margin:16px 0 0; color:var(--muted); font-size:13px;">
+            Ideal para empresas, oficinas, hoteles, inmobiliarias y programas de responsabilidad social.
+          </p>
+        </div>
+
+        <div class="hero-side" aria-label="Beneficios principales">
+          <div class="mini">
+            <h3>🌍 Impacto ambiental real</h3>
+            <p>Reducimos residuos plásticos y los convertimos en productos con valor.</p>
+          </div>
+          <div class="mini">
+            <h3>♿ Inclusión con empleo digno</h3>
+            <p>Integramos talento diverso en una cadena productiva accesible y segura.</p>
+          </div>
+          <div class="mini">
+            <h3>🏢 Proveeduría para empresas</h3>
+            <p>Entregas por pedido, kits corporativos y compras recurrentes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUE HACEMOS -->
+    <section id="quehacemos" aria-label="Qué hacemos">
+      <div class="section-title">
+        <div>
+          <h2>¿Qué hacemos?</h2>
+          <p>Un modelo productivo que une reciclaje, manufactura y jardinería con enfoque inclusivo.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="tag">Paso 1</div>
+          <h3>Recolección y clasificación</h3>
+          <p>Recibimos plástico (donación o acopio), lo separamos y lo preparamos para reciclaje.</p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Paso 2</div>
+          <h3>Fabricación de macetas</h3>
+          <p>Transformamos el material reciclado en macetas resistentes y reutilizables.</p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Paso 3</div>
+          <h3>Siembra y entrega</h3>
+          <p>Integramos plantas (ornamentales, aromáticas o interiores) listas para venta o kits.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACTO -->
+    <section id="impacto" aria-label="Impacto del proyecto">
+      <div class="section-title">
+        <div>
+          <h2>Impacto medible</h2>
+          <p>Medimos resultados ambientales y sociales para asegurar transparencia y mejora continua.</p>
+        </div>
+      </div>
+
+      <div class="grid-4">
+        <div class="metric">
+          <strong>+1</strong>
+          <span>Toneladas de plástico recuperadas (meta inicial)</span>
+        </div>
+        <div class="metric">
+          <strong>+500</strong>
+          <span>Macetas ecológicas por mes (meta inicial)</span>
+        </div>
+        <div class="metric">
+          <strong>+10</strong>
+          <span>Empleos generados (meta por etapa)</span>
+        </div>
+        <div class="metric">
+          <strong>+60%</strong>
+          <span>Participación inclusiva (meta operativa)</span>
+        </div>
+      </div>
+
+      <p style="margin-top:14px; color:var(--muted); font-size:13px;">
+        *Los indicadores pueden ajustarse según la etapa del proyecto y los aliados estratégicos.
+      </p>
+    </section>
+
+    <!-- INCLUSION -->
+    <section id="inclusion" aria-label="Inclusión de personas con discapacidad">
+      <div class="section-title">
+        <div>
+          <h2>Inclusión laboral: el corazón del proyecto</h2>
+          <p>Diseñamos procesos accesibles bajo principios de dignidad, respeto, capacitación y seguridad.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="tag">Accesibilidad</div>
+          <h3>Actividades adaptadas</h3>
+          <p>
+            Clasificación, ensamble, etiquetado, empaquetado, siembra y armado de pedidos según habilidades.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Capacitación</div>
+          <h3>Formación constante</h3>
+          <p>Entrenamiento práctico y acompañamiento para asegurar calidad, confianza y crecimiento.</p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Respeto</div>
+          <h3>Cultura inclusiva</h3>
+          <p>Ambiente laboral sin discriminación, con comunicación clara y trabajo en equipo.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;" class="cta">
+        <div>
+          <h3>♿ Nuestro compromiso</h3>
+          <p>
+            No hablamos de inclusión como discurso. La hacemos parte de la operación diaria, con procesos reales,
+            adaptaciones y oportunidades constantes.
+          </p>
+        </div>
+        <a class="btn primary" href="#alianzas">🤝 Quiero apoyar</a>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section id="productos" aria-label="Productos">
+      <div class="section-title">
+        <div>
+          <h2>Productos</h2>
+          <p>Macetas ecológicas con plantas, listas para entregar. Ideal para regalos corporativos y proveedores.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card product">
+          <div class="tag">Más vendido</div>
+          <h3>Maceta ecológica + suculenta</h3>
+          <p>Perfecta para escritorios, oficinas y regalos empresariales.</p>
+          <div class="price">
+            <span>Entrega por pedido</span>
+            <span>📦 Kits disponibles</span>
+          </div>
+        </div>
+
+        <div class="card product">
+          <div class="tag">Aromáticas</div>
+          <h3>Maceta ecológica + planta aromática</h3>
+          <p>Romero, menta, albahaca y más (según temporada).</p>
+          <div class="price">
+            <span>Ideal para restaurantes</span>
+            <span>🌿 Sustentable</span>
+          </div>
+        </div>
+
+        <div class="card product">
+          <div class="tag">Interior</div>
+          <h3>Maceta ecológica + planta interior</h3>
+          <p>Opciones decorativas para hogares, hoteles y espacios comunes.</p>
+          <div class="price">
+            <span>Pedido recurrente</span>
+            <span>🏢 Proveedor</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;" class="cta">
+        <div>
+          <h3>🌱 ¿Quieres catálogo y precios?</h3>
+          <p>Te enviamos opciones por volumen, personalización y entregas por mes.</p>
+        </div>
+        <a class="btn secondary" href="#contacto">📩 Solicitar cotización</a>
+      </div>
+    </section>
+
+    <!-- CLIENTES -->
+    <section aria-label="Clientes objetivo">
+      <div class="section-title">
+        <div>
+          <h2>¿Para quién es este proyecto?</h2>
+          <p>Somos una opción de proveeduría sustentable e inclusiva para organizaciones.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="tag">Empresas</div>
+          <h3>ESG / RSE</h3>
+          <p>Apoya metas ambientales y sociales con compras que generan impacto real.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Gobierno</div>
+          <h3>Programas verdes</h3>
+          <p>Ideal para campañas ambientales, educación y acciones comunitarias.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Sector servicios</div>
+          <h3>Hoteles y restaurantes</h3>
+          <p>Decoración sostenible, aromáticas y kits de concientización.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALIANZAS -->
+    <section id="alianzas" aria-label="Alianzas y financiamiento">
+      <div class="section-title">
+        <div>
+          <h2>Alianzas y apoyo</h2>
+          <p>Buscamos aliados para crecer: financiamiento, donación de plástico o compras recurrentes.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="tag">🏦 Financiamiento</div>
+          <h3>Fondos / programas / patrocinios</h3>
+          <ul class="checklist">
+            <li>Fondos de inversión de impacto</li>
+            <li>Programas gubernamentales</li>
+            <li>Patrocinio empresarial</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag">♻️ Materia prima</div>
+          <h3>Donación de plástico</h3>
+          <ul class="checklist">
+            <li>Empresas con alto consumo</li>
+            <li>Centros de acopio</li>
+            <li>Municipios</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag">🛒 Ventas</div>
+          <h3>Compra recurrente</h3>
+          <ul class="checklist">
+            <li>Contratos como proveedor</li>
+            <li>Pedidos mensuales</li>
+            <li>Kits corporativos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" aria-label="Formulario de contacto">
+      <div class="section-title">
+        <div>
+          <h2>Contacto</h2>
+          <p>Déjanos tus datos y te respondemos. Puedes pedir cotización, alianza o donar plástico.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="grid-template-columns: 1.1fr .9fr .9fr;">
+        <div class="card" style="grid-column: 1 / span 2;">
+          <form>
+            <div class="form-grid">
+              <div>
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" type="text" placeholder="Ej. Jorge López" required />
+              </div>
+              <div>
+                <label for="empresa">Empresa / Organización</label>
+                <input id="empresa" name="empresa" type="text" placeholder="Ej. Mi Empresa S.A. de C.V." />
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div>
+                <label for="correo">Correo</label>
+                <input id="correo" name="correo" type="email" placeholder="correo@empresa.com" required />
+              </div>
+              <div>
+                <label for="telefono">Teléfono</label>
+                <input id="telefono" name="telefono" type="tel" placeholder="55 0000 0000" />
+              </div>
+            </div>
+
+            <div>
+              <label for="interes">¿Qué te interesa?</label>
+              <select id="interes" name="interes" required>
+                <option value="">Selecciona una opción</option>
+                <option>Comprar como proveedor</option>
+                <option>Alianza / Inversión</option>
+                <option>Donar plástico</option>
+                <option>Voluntariado</option>
+                <option>Otro</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas y te respondemos..."></textarea>
+            </div>
+
+            <button class="btn primary" type="submit">📨 Enviar mensaje</button>
+
+            <p style="margin:0; color:var(--muted); font-size:12px;">
+              Nota: Este formulario es demostrativo. Puedes conectarlo a Google Forms, correo o WhatsApp.
+            </p>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="tag">📌 Datos</div>
+          <h3>Atención</h3>
+          <p>Respuesta en 24–48 hrs.</p>
+          <p style="margin-top:10px; color:var(--muted); font-size:14px;">
+            Horario: Lunes a Viernes<br/>
+            9:00 a 18:00
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">💚 Mensaje</div>
+          <h3>Gracias por apoyar</h3>
+          <p>
+            Este proyecto existe para generar conciencia, empleo inclusivo y un impacto ambiental real.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CIERRE -->
+    <section aria-label="Cierre">
+      <div class="cta">
+        <div>
+          <h3>♻️ Reciclar no solo transforma materiales, transforma vidas.</h3>
+          <p>Si quieres comprar, invertir o ser aliado estratégico, este es el momento de sumarte.</p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn secondary" href="#productos">🌱 Ver productos</a>
+          <a class="btn primary" href="#contacto">📩 Contactar</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:8px;">
+          <div class="logo" aria-hidden="true"></div>
+          <div style="font-weight:900;">Reciclamos Plástico, Transformamos Vidas</div>
+        </div>
+        <p style="margin:0;">
+          Proyecto de economía circular e inclusión laboral.
+        </p>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;">
+          <strong style="color:var(--text);">Accesibilidad (POUR):</strong><br/>
+          Diseño perceptible, operable, comprensible y robusto.
+        </p>
+        <p style="margin:0;">
+          © <span id="year"></span> — Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
